@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link href="https://fonts.googleapis.com/css?family=Maven+Pro" rel="stylesheet">
+    <title>Takima Kart</title>
+
+    <!-- compiled css output -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-cookies/angular-cookies.js"></script>
+    <script src="lib/angular-animate/angular-animate.js"></script>
+    <script src="lib/angular-sanitize/angular-sanitize.js"></script>
+    <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="lib/underscore/underscore.js"></script>
+    <script src="lib/threejs/build/three.js"></script>
+    <!--<script src="lib/chart.js/dist/Chart.min.js"></script>-->
+    <script src="otherLib/StereoEffect.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/app.module.js"></script>
+    <script src="js/app.routes.js"></script>
+    <script src="js/app.run.js"></script>
+
+    <script src="js/app.constant.config.js"></script>
+
+    <script src="js/models/item.model.js"></script>
+    <script src="js/models/racer.model.js"></script>
+    <script src="js/core/race.service.js"></script>
+    <script src="js/filters/time.filter.js"></script>
+
+    <script src="js/components/kart/help/help.js"></script>
+    <script src="js/components/kart/driver-selection/driver-selection.js"></script>
+    <script src="js/core/binding.service.js"></script>
+    <script src="js/core/cars.services.js"></script>
+    <script src="js/core/circuits.service.js"></script>
+    <script src="js/core/driver-name.service.js"></script>
+
+    <script src="js/components/kart/kart.ctrl.js"></script>
+
+  </head>
+  <body data-ng-app="ebiz-kart">
+    <ui-view></ui-view>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-10826408-16"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-10826408-16');
+    </script>
+  </body>
+</html>

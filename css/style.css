@@ -1,0 +1,605 @@
+@font-face {
+    font-family: 'Pixelated Mario';
+    /*src: url('../assets/fonts/Super-Mario-World.ttf');*/
+    src: url('../assets/fonts/Pixeled.ttf');
+}
+
+body, html {
+    position: relative;
+    width: 100vw;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-family: 'Maven Pro', sans-serif;
+    margin: 0;
+    font-size: 12px;
+    line-height: 18px;
+}
+body *, html * {
+    box-sizing: border-box;
+}
+body b, html b {
+    letter-spacing: 1px;
+}
+
+#mode7ctnr canvas{
+    position: relative;
+    z-index: 10;
+}
+
+.score-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    height: 100px;
+    pointer-events: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 15;
+    color: white;
+    text-shadow: 5px 5px 0 rgba(0,0,0,0.6);
+}
+
+
+.score-panel .score {
+    font-family: 'Pixelated Mario', sans-serif;
+    text-align: center;
+    font-size: 2em;
+}
+.score-panel .score .time {
+    position: relative;
+    font-size: 0.8em;
+    top: 15px;
+}
+
+.score-panel.objective {
+    left: auto;
+    right: 0;
+    top: auto;
+    bottom: 0;
+    height: 50px;
+    justify-content: flex-end;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.6);
+}
+
+.score-panel.received-items {
+    left: auto;
+    right: 0;
+    top: auto;
+    bottom: 40%;
+    height: calc(60% - 100px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+
+}
+
+.received-item {
+    transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
+    height: 30px;
+    text-align: center;
+    margin-bottom: 10px;
+    background: rgba(255, 255, 255,  0.05);
+    display: flex;
+    align-items: center;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.6);
+    padding-right: 10px;
+}
+
+.received-item.ng-enter { opacity: 0; transform: translateX(-300px); }
+.received-item.ng-enter-active { opacity: 1; transform: translateX(0); }
+.received-item.ng-leave { opacity: 1; transform: translateX(0); }
+.received-item.ng-leave-active { opacity: 0; transform: translateX(-300px); }
+
+.received-item img {
+    height: 30px;
+    margin-right: 10px;
+}
+.received-item span {
+    margin-left: 10px;
+}
+.received-item span.malus {
+    color: red;
+}
+.received-item span.bonus {
+    color: green;
+}
+.received-item span.superbonus {
+    color: goldenrod;
+}
+.received-item span.supermalus {
+    color: black;
+}
+
+
+.score-panel.objective .score {
+    font-size: 1.1em;
+}
+
+
+@media(min-width: 800px){
+    .score-panel.received-items {
+        font-size: 2.4em;
+    }
+    .received-item {
+        height: 70px;
+    }
+    .received-item img {
+        height: 70px;
+    }
+}
+
+@media(max-width: 800px){
+    .score-panel.received-items {
+        font-size: 1.4em;
+    }
+    .score-panel .score {
+        font-size: 1.2em;
+    }
+    .score-panel.objective .score {
+        font-size: 0.9em;
+    }
+}
+
+
+.back-btn {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    border-radius: 8px;
+    padding: 6px;
+    font-family: 'Pixelated Mario', sans-serif;
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    z-index: 16;
+    background: #00aa00;
+    color: white;
+    text-shadow: 3px 3px 0 rgba(0,0,0,0.5);
+    box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
+    text-align: center;
+    margin: 2px;
+    cursor: pointer;
+}
+
+.back-btn.site {
+    bottom: 60px;
+}
+
+.back-btn span {
+    position: relative;
+    top: -4px;
+}
+
+
+.back-btn img{
+    height: 24px;
+    width: 24px;
+    min-height: 24px;
+    min-width: 24px;
+    margin-right: 15px;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+}
+
+@media(max-width: 800px){
+    .back-btn {
+        font-size: 0.7em !important;
+    }
+    .back-btn .text {
+        display: none;
+    }
+    .back-btn img{
+        margin-right: 0;
+    }
+}
+
+.driver-select {
+    min-height: 100%;
+    width: 100%;
+    background-image: url('../assets/img/kart/ui/wallpaper.png');
+    background-repeat: repeat;
+    -webkit-background-size: cover;
+    background-size:cover;
+    font-family: 'Pixelated Mario', sans-serif;
+    color: white;
+    text-transform: lowercase;
+    display: flex;
+    justify-content: center;
+}
+
+@media(max-width: 800px){
+    .driver-select {
+        font-size: 0.9em;
+    }
+}
+
+.driver-select-content {
+    max-width: 1200px;
+}
+
+.driver-select-title {
+    font-size: 1.5em;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    text-shadow: 5px 5px 0 rgba(0,0,0,0.7 );
+}
+
+
+@media(max-width: 800px){
+    .driver-select-title {
+        font-size: 1.2em;
+        margin-bottom: 5px;
+    }
+}
+
+.driver-help {
+    font-size: 0.8em;
+    padding: 10px;
+    text-align: center;
+    overflow: auto;
+}
+
+.driver-help-keys {
+    background: rgba(255,255,255,0.1);
+    padding: 10px;
+}
+
+.driver-help-key {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+}
+.driver-help-key .key {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    margin-right: 15px;
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    background: #f7faf3;
+    color: #cb2468;
+    box-shadow: 0 6px 0 rgba(255,255,255,0.5);
+    font-size: 1.3em;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.driver-ctnr {
+    height: calc(100% - 130px);
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+}
+.driver-ctnr .drivers {
+    flex: 1 1 400px;
+    margin: 15px;
+    background: rgba(0,0,0,0.5);
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+}
+
+.driver-ctnr .name_selection {
+    flex: 1 1 100%;
+    padding: 15px;
+    text-align: center;
+}
+.driver-ctnr .name_selection .title {
+    font-size: 16px;
+}
+.driver-ctnr .name_selection input {
+    border-radius: 0px;
+    border: 3px solid lightgrey;
+    padding: 8px;
+    text-align: center;
+    font-size: 18px;
+    width: 80%;
+    margin: auto;
+}
+.driver-ctnr .name_selection input.error {
+    border: 3px solid #C00;
+}
+
+.tweet {
+    text-align: center;
+    padding: 10px;
+}
+.tweet .twitter-share-button {
+    margin: auto;
+    background: #09F;
+    padding: 8px 10px;
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+@media(max-width: 800px){
+    .driver-ctnr .drivers {
+        margin: 5px;
+        padding: 5px;
+    }
+}
+
+.driver-ctnr .driver {
+    width: 80px;
+    height: 80px;
+    margin: 10px 10px 38px 10px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+    image-rendering: -moz-crisp-edges;
+    image-rendering: pixelated;
+
+    background-size: cover;
+    overflow: hidden;
+
+    box-shadow: 5px 5px 0 rgba(0,0,0,0.9);
+}
+
+.driver-ctnr .driver img {
+    min-width: 80px;
+    height: 80px;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: pixelated;
+}
+
+.driver-ctnr .driver-selection-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 15;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border: 5px solid rgba(255,255,255,0.5);
+}
+
+.driver-ctnr .driver .driver-name {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 0.8em;
+    padding-top: 7px;
+    text-shadow: 3px 3px 0 rgba(0,0,0,0.8);
+}
+
+.driver-ctnr .drivers-stats {
+    padding: 20px;
+    overflow: auto;
+}
+
+@media(max-width: 800px){
+    .driver-ctnr .drivers-stats {
+        padding: 10px;
+    }
+}
+
+.driver-stat-title.name {
+    margin-bottom: 10px;
+    font-size: 1.3em;
+    text-shadow: 5px 5px 0 rgba(0,0,0,0.7);
+}
+
+.driver-stats .driver-stat {
+    height: 40px;
+    display: flex;
+}
+.driver-stat .driver-stat-squares {
+    display: flex;
+}
+.driver-stat-square {
+    transition: background 200ms ease-in-out;
+
+    box-sizing: border-box;
+    border: 2px solid rgb(255,255,255);
+    width: 40px;
+    height: 25px;
+    background-size: 0 0;
+}
+
+@media(max-width: 800px){
+    .driver-stat-square {
+        width: 25px;
+        height: 15px;
+    }
+}
+
+.driver-stat-square.squarefull {
+    image-rendering: -moz-crisp-edges;
+    image-rendering: pixelated;
+    background-size: cover;
+}
+
+.driver-select-footer {
+    margin: 10px 20px;
+
+    height: 50px;
+    width: calc(100% - 40px);
+    padding: 10px;
+    position: relative;
+
+    background: rgba(0,0,0,0.5);
+
+    display: flex;
+
+    justify-content: space-between;
+}
+
+.driver-select-footer-btn {
+    left: 0;
+    bottom: 0;
+    position: relative;
+
+    font-size: 0.9em;
+}
+.driver-select-footer-btn.pink {
+    background: #cb2468;
+}
+.driver-select-footer-btn img {
+    height: 24px;
+    width: 24px;
+}
+
+.driver-select-footer-btn span {
+    position: relative;
+    top: -4px;
+}
+
+.kart-loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url('../assets/img/kart/ui/wallpaper.png');
+    background-repeat: repeat;
+    font-family: 'Pixelated Mario', sans-serif;
+    color: white;
+    text-transform: lowercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.kart-loading-pop {
+    background: #cb2468;
+    padding: 10px;
+    border-radius: 5px;
+
+    box-shadow: rgba(203, 36, 104, 0.59);
+
+}
+
+.pixellated-background {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+}
+
+#parallax {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.parallax-ctnr {
+    position: absolute;
+    top: 0;
+}
+
+.parallax-background {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+}
+
+.kart-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 10000;
+
+    background: rgba(0,0,0,0.8);
+}
+
+.kart-modal .modal-ctnr {
+    background: white;
+    border-radius: 5px;
+
+}
+
+.kart-modal .modal-ctnr .title {
+    background: #00aa00;
+    color: white;
+    text-align: center;
+    font-size: 1.3em;
+    line-height: 1.3em;
+    font-family: 'Pixelated Mario', sans-serif;
+    padding: 10px;
+
+    text-transform: uppercase;
+}
+
+.kart-modal .modal-ctnr .desc {
+    padding: 10px;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.kart-modal .modal-ctnr .modal-btns {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+.kart-modal .modal-ctnr .modal-btns .modal-btn {
+    padding: 5px 10px;
+    background: #00aa00;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+
+    margin: 0 10px;
+}
+
+.kart-modal.lose .modal-ctnr .title{
+    background: red;
+}
+.kart-modal.lose .modal-ctnr .modal-btns .modal-btn {
+    background: red;
+}
+
+#mode7ctnr {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#debug-values {
+    position: absolute;
+    z-index: 15;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 10px;
+    font-size: 0.8em;
+}

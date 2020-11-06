@@ -1,0 +1,119 @@
+<!--<div class="driver-selection">-->
+
+  <!--<div class="driver-container">-->
+
+      <!--<div class="driver-container-title">-->
+        <!--Choix du pilote-->
+      <!--</div>-->
+
+      <!--<div class="driver-content">-->
+        <!--<div class="driver-top">-->
+          <!--<div class="driver-stats" ng-show="false">-->
+            <!--<div class="driver-chart">-->
+              <!--<div class="driver-chart-content">-->
+                <canvas id="stats-chart" ng-show="0"></canvas>
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="driver-bottom">-->
+          <!--<div class="drivers">-->
+            <!--<div class="driver"-->
+                 <!--data-ng-repeat="driver in dsc.drivers"-->
+                 <!--data-ng-style="dsc.getDriverColor(driver)"-->
+                 <!--data-ng-click="dsc.selectDriver(driver)">-->
+              <!--<img data-ng-src="{{driver.sprites.FACE.url}}" alt="{{driver.name}}">-->
+              <!--<div class="driver-name">-->
+                <!--{{driver.name}}-->
+              <!--</div>-->
+              <!--<div class="driver-selection-border" data-ng-if="dsc.chosenDriver === driver"></div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="driver-confirm">-->
+          <!--<div class="driver-confirm-btn" data-ng-click="dsc.confirmDriver()">-->
+            <!--<span>Choisir {{dsc.chosenDriver.name}}</span>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+
+  <!--</div>-->
+
+<!--</div>-->
+
+<div class="driver-select">
+  <div class="driver-select-content">
+    <div class="driver-select-title">
+      Choix du pilote
+    </div>
+    <div class="driver-ctnr">
+
+      <div class="name_selection">
+        <h2 class="title">Merci de taper ton prénom <span style="color: #C00">{{ (dsc.form_name? "(sans caractères spéciaux)":"") }}</span></h2>
+        <input type="text" id="driverName" name="driverName" data-ng-model="dsc.name" ng-class="{error: dsc.form_name}" />
+      </div>
+
+      <div class="drivers" id="drivers">
+        <div class="driver" data-ng-repeat="driver in dsc.drivers" data-ng-style="dsc.getDriverColor(driver)" data-ng-click="dsc.selectDriver(driver)">
+          <img data-ng-src="{{driver.sprites.SELECT.url}}" alt="{{driver.name}}">
+          <div class="driver-name">
+            {{driver.name}}
+          </div>
+          <div class="driver-selection-border" data-ng-if="dsc.chosenDriver === driver"></div>
+        </div>
+      </div>
+      <div class="drivers-stats">
+        <div class="driver-stat">
+          <div class="driver-stat-title name">{{dsc.chosenDriver.name}}</div>
+        </div>
+        <div class="driver-stat">
+          <div class="driver-stat-title">speed</div>
+          <div class="driver-stat-squares">
+            <div class="driver-stat-square" data-ng-repeat="square in [1,2,3,4,5,6,7]" data-ng-class="{'squarefull': dsc.chosenDriver.speed >= square}"  data-ng-style="dsc.getDriverColor(dsc.chosenDriver)"></div>
+          </div>
+        </div>
+        <div class="driver-stat">
+          <div class="driver-stat-title">acceleration</div>
+          <div class="driver-stat-squares">
+            <div class="driver-stat-square" data-ng-repeat="square in [1,2,3,4,5,6,7]" data-ng-class="{'squarefull': dsc.chosenDriver.acceleration >= square}"  data-ng-style="dsc.getDriverColor(dsc.chosenDriver)"></div>
+          </div>
+        </div>
+        <div class="driver-stat">
+          <div class="driver-stat-title">weight</div>
+          <div class="driver-stat-squares">
+            <div class="driver-stat-square" data-ng-repeat="square in [1,2,3,4,5,6,7]" data-ng-class="{'squarefull': dsc.chosenDriver.weight >= square}"  data-ng-style="dsc.getDriverColor(dsc.chosenDriver)"></div>
+          </div>
+        </div>
+        <div class="driver-stat">
+          <div class="driver-stat-title">handling</div>
+          <div class="driver-stat-squares">
+            <div class="driver-stat-square" data-ng-repeat="square in [1,2,3,4,5,6,7]" data-ng-class="{'squarefull': dsc.chosenDriver.handling >= square}"  data-ng-style="dsc.getDriverColor(dsc.chosenDriver)"></div>
+          </div>
+        </div>
+        <div class="driver-stat">
+          <div class="driver-stat-title">traction</div>
+          <div class="driver-stat-squares">
+            <div class="driver-stat-square" data-ng-repeat="square in [1,2,3,4,5,6,7]" data-ng-class="{'squarefull': dsc.chosenDriver.traction >= square}"  data-ng-style="dsc.getDriverColor(dsc.chosenDriver)"></div>
+          </div>
+        </div>
+        <div class="driver-stat">
+          <div class="driver-stat-title">luck</div>
+          <div class="driver-stat-squares">
+            <div class="driver-stat-square" data-ng-repeat="square in [1,2,3,4,5,6,7]" data-ng-class="{'squarefull': dsc.chosenDriver.luck >= square}"  data-ng-style="dsc.getDriverColor(dsc.chosenDriver)"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="driver-select-footer">
+      <div class="back-btn driver-select-footer-btn pink" ng-click="dsc.goHelp()">
+        <img src="assets/img/menu/back-help.png"> <span>revoir l'aide</span>
+      </div>
+      <div class="back-btn driver-select-footer-btn" data-ng-click="dsc.confirmDriver()">
+        <span>Choisir ce pilote</span>
+      </div>
+    </div>
+
+  </div>
+
+</div>

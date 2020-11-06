@@ -1,0 +1,104 @@
+<div>
+
+
+  <div class="kart-modal lose" ng-if="kt.lose">
+    <div class="modal-ctnr">
+      <div class="title">{{kt.CONFIG.LOSE.TITLE}}</div>
+      <div class="desc">
+        Points récoltés : {{kt.racer.points}}pts
+        <br/>Temps: {{kt.totalTime | timeFilter}} / {{kt.timeLimit | timeFilter}}
+        <br/>Bonus temps: {{kt.bonusTime}}pts
+        <br/>Total : {{kt.finalPoints}}pts / {{kt.objective}}pts
+        <hr/>
+        {{kt.CONFIG.LOSE.DESC}}
+      </div>
+      <div class="modal-btns">
+        <div class="modal-btn" ng-click="kt.gameEndAction()">{{kt.CONFIG.LOSE.CANCEL}}</div>
+        <div class="modal-btn" ng-click="kt.gameEndAction(true)">{{kt.CONFIG.LOSE.VALID}}</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="kart-modal" ng-if="kt.win">
+    <div class="modal-ctnr">
+      <div class="title">{{kt.CONFIG.WIN.TITLE}}</div>
+      <div class="desc">
+        Points récoltés : {{kt.racer.points}}pts
+        <br/>Temps: {{kt.totalTime | timeFilter}} / {{kt.timeLimit | timeFilter}}
+        <br/>Bonus temps: {{kt.bonusTime}}pts
+        <br/>Total : {{kt.finalPoints}}pts / {{kt.objective}}pts
+        <hr/>
+        {{kt.CONFIG.WIN.DESC}}
+      </div>
+
+      <div class="tweet">
+        <a class="twitter-share-button"
+           target="_blank"
+           href="https://twitter.com/intent/tweet?text=Je%20viens%20de%20réaliser%20un%20score%20de%20{{kt.finalPoints}}pts%20sur%20le%20takima%20kart%20!%20Essaie%20de%20me%20battre%20!&via=takimafr&url=https%3A%2F%2Ftakima.fr/jobs/postuler"
+           data-size="large" >
+          Tweeter mon résultat !</a>
+      </div>
+
+      <div class="modal-btns">
+        <div class="modal-btn" ng-click="kt.gameEndAction(true)">{{kt.CONFIG.WIN.CANCEL}}</div>
+        <div class="modal-btn" ng-click="kt.gameEndAction()">{{kt.CONFIG.WIN.VALID}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kart-loading" ng-show="kt.isLoading">
+    <div class="kart-loading-pop"> Chargement en cours ... </div>
+  </div>
+  <div id="mode7ctnr" ng-show="!kt.isLoading" data-on-touch-start="kt.launchJoystick($event)"
+       data-on-mouse-move="kt.moveJoystick($event)" data-on-touch="kt.setBinding('jump_cardboard', true)"
+       data-ng-style="kt.circuitBack" data-on-release="kt.setBinding('jump_cardboard', false)">
+
+    <div id="parallax"></div>
+
+    <div id="debug-values" data-ng-if="kt.debug">
+      <!--ax: {{kt.accelerometer.x | number:3}}-->
+      <!--<br/>ay: {{kt.accelerometer.y | number:3}}-->
+      <!--<br/>az: {{kt.accelerometer.z | number:3}}-->
+      time: {{kt.totalTime | timeFilter}}
+      <br/>acc: {{kt.racer.accelerationLevel | number:3}}
+      <br/>speed: {{kt.racer.speed | number:3}}
+      <br/>rotation: {{kt.racer.rotation | number:3}}
+      <br/>speed: {{kt.racer.speed*40 | number:0}}km/h
+      <br/>ground: {{kt.racer.ground | number:3}}
+      <br/>fps: {{kt.averageFPS}}
+      <br/>status: {{kt.racer.status}}
+      <br/>direction: {{kt.racer.driftDirection}}
+      <br/>rotatedir: {{kt.racer.rotateDirection}}
+      <br/>bonus: {{kt.racer.bonus}}
+      <br/>cp: {{kt.racer.nbCp}}
+      <br/>turn: {{kt.racer.turn}}
+      <br/>points: {{kt.racer.points}}
+    </div>
+
+    <div class="score-panel">
+      <div class="score">
+        score: {{kt.racer.points}} pt{{kt.racer.points > 1?'s':''}}
+        <br/>
+        <span class="time">{{kt.totalTime | timeFilter}}</span>
+      </div>
+    </div>
+    <div class="score-panel received-items">
+      <div class="received-item" ng-repeat="item in (kt.racer.receivedItems | limitTo:4) track by $index">
+        <img ng-src="{{item.img}}"/> {{item.libelle}} <span ng-class="item.effectClass">{{item.effect}}</span>
+      </div>
+    </div>
+    <div class="score-panel objective">
+      <div class="score">
+        objectif: {{kt.objective}} pt{{kt.objective > 1?'s':''}}<br/>
+        temps: {{kt.timeLimit | timeFilter}}
+      </div>
+    </div>
+
+    <div class="back-btn" data-ng-click="kt.backToChoice()">
+      <img src="assets/img/menu/back-racer.png"> <span class="text">choix du pilote</span>
+    </div>
+    <div class="back-btn site" data-ng-click="kt.backToSite()">
+      <img src="assets/img/menu/back-web.png"> <span class="text">revenir au site</span>
+    </div>
+  </div>
+</div>
